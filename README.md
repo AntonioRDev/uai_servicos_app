@@ -1,2 +1,2 @@
 # uai_servicos_app
-App Xamarin da UAI Serviços
+App React Native da UAI Serviços
