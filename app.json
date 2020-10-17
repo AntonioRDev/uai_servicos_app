@@ -4,9 +4,9 @@
     "slug": "uai-servicos-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icons/icon.png",
+    "icon": "./src/assets/icons/icon.png",
     "splash": {
-      "image": "./assets/icons/splash.png",
+      "image": "./src/assets/icons/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,7 +20,23 @@
       "supportsTablet": true
     },
     "web": {
-      "favicon": "./assets/icons/favicon.png"
+      "favicon": "./src/assets/icons/favicon.png"
+    },
+    "packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": [
+        "expo.ts",
+        "expo.tsx",
+        "expo.js",
+        "expo.jsx",
+        "ts",
+        "tsx",
+        "js",
+        "jsx",
+        "json",
+        "wasm",
+        "svg"
+      ]
     }
   }
 }

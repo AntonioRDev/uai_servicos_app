@@ -1,10 +1,13 @@
-import React from 'react';
-import { View } from 'react-native';
+import "react-native-gesture-handler";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
 
-import Login from "./pages/Login";
+import MainStack from "./src/navigation/stacks/main-stack";
 
 export default function App() {
   return (
-      <Login />
+    <NavigationContainer>
+      <MainStack />
+    </NavigationContainer>
   );
 }

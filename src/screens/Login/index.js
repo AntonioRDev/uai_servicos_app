@@ -15,7 +15,7 @@ const Login = () => {
                 <View>
                     <View style={styles.emailCtn}>
                         <Text style={styles.label}>Email</Text>
-                        <TextInput style={styles.input} placeholder="Digite seu e-mail" />
+                        <TextInput style={styles.input} placeholder="Dgite seu e-mail" />
                     </View>
 
                     <View style={styles.passwordCtn}>
