@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Container, ContentContainer, LoadingIcon } from "./styles";
 import LoadingArt from "../../assets/images/loading-art.svg";
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native";
 
-import { getToken } from "../../services/local-storage"
+import { getToken } from "../../services/local-storage";
 
 export default () => {
     const navigation = useNavigation();

@@ -1,42 +1,60 @@
-import React from 'react';
-import { Text, View, Image, TextInput } from 'react-native';
-import Button from "../../components/Button"
-import styles from "./styles";
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import { View, Image } from "react-native";
+import Button from "../../components/Button";
+import styles, {
+  Container,
+  InnerContainer,
+  ImageContainer,
+  EmailContainer,
+  Label,
+  Input,
+  PasswordContainer,
+  SignInContainer,
+  FooterContainer,
+  ForgotPass,
+  ButtonText,
+  Register,
+} from "./styles";
 import Logo from "../../assets/images/logo.png";
 
-const Login = () => {    
-    return (
-        <View style={styles.container}>
-            <View style={styles.innerContainer}>
-                <View style={styles.imageCtn}>
-                    <Image source={Logo}/>
-                </View>
+const Login = () => {
+  const navigation = useNavigation();
 
-                <View>
-                    <View style={styles.emailCtn}>
-                        <Text style={styles.label}>Email</Text>
-                        <TextInput style={styles.input} placeholder="Dgite seu e-mail" />
-                    </View>
+  return (
+    <Container>
+      <InnerContainer>
+        <ImageContainer>
+          <Image source={Logo} />
+        </ImageContainer>
 
-                    <View style={styles.passwordCtn}>
-                        <Text style={styles.label}>Senha</Text>
-                        <TextInput style={styles.input}  secureTextEntry={true} placeholder="Digite sua senha"/>
-                    </View>
+        <View>
+          <EmailContainer>
+            <Label>Email</Label>
+            <Input placeholder="Dgite seu e-mail" />
+          </EmailContainer>
 
-                    <View style={styles.signInCtn}>
-                        <Button style={styles.button}>
-                            <Text style={styles.buttonText}>Entrar</Text>
-                        </Button>
-                    </View>
-                </View>
+          <PasswordContainer>
+            <Label>Senha</Label>
+            <Input secureTextEntry={true} placeholder="Digite sua senha" />
+          </PasswordContainer>
 
-                <View style={styles.footerCtn}>
-                    <Text style={styles.forgotPass}>Esqueceu a senha?</Text>
-                    <Text style={styles.register}>Cadastrar-se</Text>
-                </View>
-            </View>
+          <SignInContainer>
+            <Button style={styles.button}>
+              <ButtonText>Entrar</ButtonText>
+            </Button>
+          </SignInContainer>
         </View>
-    )
-}
+
+        <FooterContainer>
+          <ForgotPass>Esqueceu a senha?</ForgotPass>
+          <Register onPress={() => navigation.navigate("SignUp")}>
+            Cadastrar-se
+          </Register>
+        </FooterContainer>
+      </InnerContainer>
+    </Container>
+  );
+};
 
 export default Login;
