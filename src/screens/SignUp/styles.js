@@ -9,9 +9,10 @@ export const Container = styled.View`
 `
 
 export const InnerContainer = styled.View`
+  width: 90%;
   background-color: #FFF;
   border-radius: 15px;
-  padding: 50px 1px 50px 1px;
+  padding: 50px 20px 50px 20px;
 `
 
 export const ImageContainer = styled.View`
@@ -21,7 +22,6 @@ export const ImageContainer = styled.View`
 `
 
 export const EmailContainer = styled.View`
-  padding: 0 30px;
 ` 
 
 export const Label = styled.Text`
@@ -38,7 +38,6 @@ export const Input = styled.TextInput`
 ` 
 
 export const PasswordContainer = styled.View`
-    padding: 0 30px;
 ` 
 
 export const SignInContainer = styled.View`
@@ -48,10 +47,13 @@ export const SignInContainer = styled.View`
     margin-bottom: 5px;
 ` 
 
-export const Button = styled.View`
-    padding: 10px 120px;
+export const Button = styled.TouchableOpacity`
     border-radius: 10px;
     background-color: #283c73;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
 ` 
 
 export const ButtonText = styled.Text`
@@ -80,7 +82,6 @@ export const LoginCta = styled.Text`
 
 export const PrivacityContainer = styled.View`
     flex-direction: row;
-    padding: 0 22px;
     margin-top: 10px;
 ` 
 
@@ -96,14 +97,3 @@ export const PrivacityBolderText = styled.Text`
     font-weight: bold;
     font-size: 14px;
 `
-
-const styles = StyleSheet.create({
-  button: {
-    paddingVertical: 10,
-    paddingHorizontal: 120,
-    borderRadius: 10,
-    backgroundColor: "#283c73"
-  }
-});
-
-export default styles;
