@@ -14,6 +14,7 @@ import {
   NextText,
 } from "./styles";
 import { useRegister } from "../../contexts/Register";
+import { useNavigation } from "@react-navigation/native";
 import ProgressBar from "../ProgressBar";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import CheckBox from "@react-native-community/checkbox";
@@ -23,6 +24,7 @@ export default () => {
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const { step, setStep } = useRegister();
+  const navigation = useNavigation();
 
   const onDateChange = (event, selectedDate) => {
     setDate(selectedDate || date);
@@ -105,7 +107,7 @@ export default () => {
         )}
 
         {step === 3 && (
-          <NextButton>
+          <NextButton onPress={() => navigation.navigate("MainTab")}>
             <NextText>finalizar</NextText>
           </NextButton>
         )}

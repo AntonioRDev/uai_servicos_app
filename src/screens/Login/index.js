@@ -40,7 +40,7 @@ const Login = () => {
           </PasswordContainer>
 
           <SignInContainer>
-            <Button style={styles.button}>
+            <Button style={styles.button} onPress={() => navigation.navigate("MainTab")}>
               <ButtonText>Entrar</ButtonText>
             </Button>
           </SignInContainer>
