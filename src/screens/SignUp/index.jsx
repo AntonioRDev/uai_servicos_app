@@ -35,9 +35,9 @@ export default () => {
           {
             step === 1 ? (
               <>
-                <ImageContainer>
+                {/* <ImageContainer>
                   <Image source={Logo} />
-                </ImageContainer>
+                </ImageContainer> */}
 
                 <View>
                   <EmailContainer>

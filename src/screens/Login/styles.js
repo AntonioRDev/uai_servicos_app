@@ -1,17 +1,29 @@
-import styled from "styled-components/native";
 import { StyleSheet } from "react-native";
+import styled from "styled-components/native";
+import { TextInput, Text } from 'react-native-paper';
 
 export const Container = styled.View`
   flex: 1;
   background-color: #283c73;
   align-items: center;
   justify-content: center;
+  padding: 50px 50px;
 `
+
+export const TextContainer = styled.View`
+  margin-bottom: 20px;
+`;
 
 export const InnerContainer = styled.View`
   background-color: #FFF;
-  border-radius: 15px;
-  padding: 50px 1px 50px 1px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px; 
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-bottom: 5%;
+  padding-top: 10%;
 `
 
 export const ImageContainer = styled.View`
@@ -24,49 +36,25 @@ export const EmailContainer = styled.View`
   padding: 0 30px;
 ` 
 
-export const Label = styled.Text`
-    color: #283c73;
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 6px;
-`
-
-export const Input = styled.TextInput`
-    border-bottom-width: 1px;
-    border-color: #bababa;
-    margin-bottom: 6px;
-` 
-
-export const PasswordContainer = styled.View`
-    padding: 0 30px;
-` 
-
-export const SignInContainer = styled.View`
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 5px;
-` 
-
-export const Button = styled.View`
-    padding: 10px 120px;
-    border-radius: 10px;
-    background-color: #283c73;
-` 
-
-export const ButtonText = styled.Text`
-    color: #fff;
-    font-weight: bold;
-`
+export const TextLogin = styled.Text`
+  color: #283c73;
+  font-weight: bold;
+  font-size: 22px;
+  margin-bottom: 25px;
+  margin-left: 5px
+`;
 
 export const FooterContainer = styled.View`
     flex-direction: row;
-    justify-content: space-around;
-    margin-top: 20px;
+    margin-top: 40px;
+`
+
+export const BodyContainer = styled.View`
+  padding: 0 30px;
 `
 
 export const ForgotPass = styled.Text`
-    color: #bababa;
+    color: #9c9c9c;
     font-weight: bold;
     font-size: 16px;
 `
