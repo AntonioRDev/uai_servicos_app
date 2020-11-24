@@ -59,7 +59,8 @@ export const ObterDadosToken = () => {
   return dadosToken;
 };
 
-/* exemplo de rota*/
+/* exemplos de rota*/
+/*GET*/
 export const ListarCursos = async () => {
   const token = getToken();
   const requestOptions = {
@@ -69,6 +70,25 @@ export const ListarCursos = async () => {
   };
 
   const response = await FetchData(`${baseUrl}/cursos`, requestOptions);
+
+  return response;
+};
+
+/*POST*/
+export const ReenviarConfirmacaoEmail = async (id) => {
+  const token = getToken();
+
+  const requestOptions = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    method: "POST",
+  };
+
+  const response = await FetchData(
+    `${baseUrl}/registro/reenviar-email-confirmacao/`,
+    requestOptions
+  );
 
   return response;
 };
