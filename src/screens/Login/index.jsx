@@ -5,23 +5,10 @@ import { TextInput, Button } from 'react-native-paper';
 import styles, {
   Container,
   InnerContainer,
-  ImageContainer,
-  EmailContainer,
-  Label,
-  Input,
-  PasswordContainer,
-  SignInContainer,
-  FooterContainer,
-  ForgotPass,
-  TextFieldCustom,
-  ButtonText,
   TextContainer,
-  Register,
   TextLogin,
   BodyContainer
 } from "./styles";
-
-import {Logo} from '../../assets/images/alexandre-pires.jpg'
 
 const Login = () => {
   const navigation = useNavigation();
@@ -34,10 +21,10 @@ const Login = () => {
         <BodyContainer>        
           <TextLogin>Login</TextLogin>
           <TextContainer>
-            <TextInput label='Email' mode='outlined'></TextInput>
+            <TextInput label='Email'></TextInput>
           </TextContainer>
           <TextContainer>
-            <TextInput label='Senha' secureTextEntry={true} mode='outlined'></TextInput>
+            <TextInput label='Senha' secureTextEntry={true}></TextInput>
           </TextContainer>
 
           <TextContainer>

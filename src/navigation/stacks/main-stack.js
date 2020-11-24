@@ -1,8 +1,8 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import Load from "../../screens/Load";
 import Login from "../../screens/Login";
+import Load from "../../screens/Load";
 import SignUp from "../../screens/SignUp";
 import RegisterProvider from "../../contexts/Register";
 import MainTab from "./main-tab";

@@ -2,6 +2,12 @@ import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import { TextInput, Text } from 'react-native-paper';
 
+Container,
+  InnerContainer,
+  TextContainer,
+  TextLogin,
+  BodyContainer
+
 export const Container = styled.View`
   flex: 1;
   background-color: #283c73;
@@ -32,37 +38,16 @@ export const ImageContainer = styled.View`
     align-items: center;
 `
 
-export const EmailContainer = styled.View`
-  padding: 0 30px;
-` 
-
 export const TextLogin = styled.Text`
   color: #283c73;
   font-weight: bold;
   font-size: 22px;
   margin-bottom: 25px;
   margin-left: 5px
-`;
-
-export const FooterContainer = styled.View`
-    flex-direction: row;
-    margin-top: 40px;
 `
 
 export const BodyContainer = styled.View`
   padding: 0 30px;
-`
-
-export const ForgotPass = styled.Text`
-    color: #9c9c9c;
-    font-weight: bold;
-    font-size: 16px;
-`
-
-export const Register = styled.Text`
-    color: #283c73;
-    font-weight: bold;
-    font-size: 16px;
 `
 
 const styles = StyleSheet.create({

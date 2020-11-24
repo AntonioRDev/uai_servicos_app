@@ -1,99 +1,77 @@
-import styled from "styled-components/native";
 import { StyleSheet } from "react-native";
+import styled from "styled-components/native";
+import { TextInput, Text } from "react-native-paper";
+
+Container, InnerContainer, TextContainer, TextLogin, BodyContainer;
 
 export const Container = styled.View`
   flex: 1;
   background-color: #283c73;
   align-items: center;
   justify-content: center;
-`
+  padding: 50px 50px;
+`;
+
+export const TextContainer = styled.View`
+  margin-bottom: 20px;
+`;
 
 export const InnerContainer = styled.View`
-  width: 90%;
-  background-color: #FFF;
-  border-radius: 15px;
-  padding: 50px 20px 50px 20px;
-`
+  background-color: #fff;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-bottom: 5%;
+  padding-top: 8%;
+`;
 
 export const ImageContainer = styled.View`
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
 
-export const EmailContainer = styled.View`
-` 
+export const TextLogin = styled.Text`
+  color: #283c73;
+  font-weight: bold;
+  font-size: 22px;
+  margin-bottom: 25px;
+  margin-left: 5px;
+  margin-top: 3px;
+`;
 
-export const Label = styled.Text`
-    color: #283c73;
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 6px;
-`
-
-export const Input = styled.TextInput`
-    border-bottom-width: 1px;
-    border-color: #bababa;
-    margin-bottom: 6px;
-` 
-
-export const PasswordContainer = styled.View`
-` 
-
-export const SignInContainer = styled.View`
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 5px;
-` 
-
-export const Button = styled.TouchableOpacity`
-    border-radius: 10px;
-    background-color: #283c73;
-    width: 100%;
-    flex-direction: row;
-    justify-content: center;
-    padding: 10px;
-` 
-
-export const ButtonText = styled.Text`
-    color: #fff;
-    font-weight: bold;
-`
-
-export const FooterContainer = styled.View`
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 5px;
-`
-
-export const BackLogin = styled.Text`
-    color: #bababa;
-    font-weight: bold;
-    font-size: 16px;
-`
-
-export const LoginCta = styled.Text`
-    color: #283c73;
-    font-weight: bold;
-    font-size: 16px;
-    margin-left: 5px;
-`
-
+export const BodyContainer = styled.View`
+  padding: 0 30px;
+`;
 export const PrivacityContainer = styled.View`
-    flex-direction: row;
-    margin-top: 10px;
-` 
+  flex-direction: row;
+  margin-top: 10px;
+`;
 
 export const PrivacityText = styled.Text`
-    width: 80%;
-    margin-left: 5px;
-    color: #bababa;
-    font-size: 14px;
-`
+  width: 80%;
+  margin-top: 5px;
+  margin-left: 5px;
+  color: #6a6180;
+  font-size: 14px;
+`;
 
 export const PrivacityBolderText = styled.Text`
-    color: #283c73;
-    font-weight: bold;
-    font-size: 14px;
-`
+  color: #283c73;
+  font-weight: bold;
+  font-size: 14px;
+`;
+
+const styles = StyleSheet.create({
+  button: {
+    paddingVertical: 10,
+    paddingHorizontal: 120,
+    borderRadius: 10,
+    backgroundColor: "#283c73",
+  },
+});
+
+export default styles;

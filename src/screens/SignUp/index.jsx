@@ -1,26 +1,19 @@
 import React, { useState } from "react";
+import { Image, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { View, Image } from "react-native";
-import CheckBox from '@react-native-community/checkbox';
-import {
+import { TextInput, Button, IconButton } from "react-native-paper";
+import CheckBox from "@react-native-community/checkbox";
+import styles, {
   Container,
   InnerContainer,
-  ImageContainer,
-  EmailContainer,
-  Label,
-  Input,
-  PasswordContainer,
-  SignInContainer,
-  FooterContainer,
-  Button,
-  ButtonText,
-  BackLogin,
-  LoginCta,
-  PrivacityText,
+  TextContainer,
+  TextLogin,
+  BodyContainer,
   PrivacityContainer,
-  PrivacityBolderText
+  PrivacityText,
+  PrivacityBolderText,
 } from "./styles";
-import Logo from "../../assets/images/logo.png";
+
 import CompleteRegister from "../../components/CompleteRegister";
 import { useRegister } from "../../contexts/Register";
 
@@ -30,55 +23,72 @@ export default () => {
   const navigation = useNavigation();
 
   return (
-      <Container>
-        <InnerContainer>
-          {
-            step === 1 ? (
-              <>
-                {/* <ImageContainer>
-                  <Image source={Logo} />
-                </ImageContainer> */}
+    <Container>
+      <Image
+        source={{
+          uri:
+            "https://upload.wikimedia.org/wikipedia/commons/0/07/UNESCO_logo_white.png",
+        }}
+        style={{ width: 250, height: 250, marginTop: -380 }}
+      />
+      <InnerContainer>
+        {step === 1 ? (
+          <BodyContainer>
+            <View style={{ flex: 1, flexDirection: "row" }}>
+              <IconButton
+                icon="arrow-left"
+                color={"#6A6180"}
+                size={20}
+                onPress={() => navigation.navigate("Login")}
+              ></IconButton>
+              <TextLogin>Cadastro</TextLogin>
+            </View>
+            <TextContainer>
+              <TextInput label="Email"></TextInput>
+            </TextContainer>
+            <TextContainer>
+              <TextInput label="Senha" secureTextEntry={true}></TextInput>
+            </TextContainer>
 
-                <View>
-                  <EmailContainer>
-                    <Label>Email</Label>
-                    <Input placeholder="Insira seu e-mail" />
-                  </EmailContainer>
+            <TextContainer>
+              <PrivacityContainer>
+                <CheckBox
+                  value={privacityCheck}
+                  onValueChange={(newValue) => setPrivacityCheck(newValue)}
+                />
+                <PrivacityText>
+                  Eu aceito os{" "}
+                  <PrivacityBolderText>Termos de Uso</PrivacityBolderText>
+                </PrivacityText>
+              </PrivacityContainer>
+            </TextContainer>
 
-                  <PasswordContainer>
-                    <Label>Senha</Label>
-                    <Input secureTextEntry={true} placeholder="Digite sua senha" />
-                  </PasswordContainer>
+            <TextContainer>
+              <Button
+                mode="contained"
+                uppercase={false}
+                onPress={() => setStep(step + 1)}
+              >
+                Fazer Cadastro
+              </Button>
+            </TextContainer>
 
-                  <PrivacityContainer>
-                      <CheckBox 
-                        value={privacityCheck}
-                        onValueChange={(newValue) => setPrivacityCheck(newValue)}
-                      />
-                      <PrivacityText>
-                          Eu aceito os <PrivacityBolderText>Termos de Uso e Política de Privacidade</PrivacityBolderText>
-                      </PrivacityText>
-                  </PrivacityContainer>
-
-                  <SignInContainer>
-                    <Button onPress={() => setStep(step + 1)}>
-                      <ButtonText>Cadastrar</ButtonText>
-                    </Button>
-                  </SignInContainer>
-                </View>
-
-                <FooterContainer>
-                    <BackLogin>
-                        Tem uma conta? 
-                    </BackLogin>
-                    <LoginCta onPress={() => navigation.navigate("Login")}>Login</LoginCta>
-                </FooterContainer>
-              </>
-            ) : (
-              <CompleteRegister />
-            )
-          }
-        </InnerContainer>
-      </Container>
+            <TextContainer>
+              <Button
+                mode="outlined"
+                uppercase={false}
+                onPress={() => navigation.navigate("Login")}
+              >
+                Fazer Login
+              </Button>
+            </TextContainer>
+          </BodyContainer>
+        ) : (
+          <BodyContainer>
+            <CompleteRegister />
+          </BodyContainer>
+        )}
+      </InnerContainer>
+    </Container>
   );
 };
