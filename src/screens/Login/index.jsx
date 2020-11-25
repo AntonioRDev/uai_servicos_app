@@ -1,26 +1,54 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TextInput, Button } from 'react-native-paper';
-import styles, {
+import {
   Container,
   InnerContainer,
   TextContainer,
   TextLogin,
-  BodyContainer
+  BodyContainer,
+  LoadSpiner
 } from "./styles";
-import { getUsers } from "../../services/user";
+import { isEmail, showToast } from "../../services/util";
+import { login } from "../../services/authentication";
 
 const Login = () => {
   const navigation = useNavigation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const tryGetUsers = async () => {
-      const users = await getUsers();
-      console.log(users);
-    };
-    tryGetUsers();
+    console.log("on load");
+    // TODO: validar se já existe token no local storage
   },[]);
+
+  const doLogin = async() => {
+    console.log("doLogin");
+
+    if(!email || !password){
+      showToast("error", "Email e Senha devem ser preenchidos.");
+      return;
+    }
+
+    if(!isEmail(email)){
+      showToast("error", "Email inválido, digite um email válido.");
+      return;
+    }
+
+    setLoading(true);
+
+    try{
+      const response = await login(email, password);
+      console.log(response);
+      setLoading(false);
+      navigation.navigate("MainTab");
+    } catch(error) {    
+      showToast("error", "Erro ao fazer login");
+      setLoading(false);
+    }
+  }
 
   return (
     <Container>
@@ -30,20 +58,20 @@ const Login = () => {
         <BodyContainer>        
           <TextLogin>Login</TextLogin>
           <TextContainer>
-            <TextInput label='Email'></TextInput>
+            <TextInput label="Email" value={email} onChangeText={text => setEmail(text)} ></TextInput>
           </TextContainer>
           <TextContainer>
-            <TextInput label='Senha' secureTextEntry={true}></TextInput>
+            <TextInput label="Senha" value={password} onChangeText={text => setPassword(text)} secureTextEntry={true}></TextInput>
           </TextContainer>
 
           <TextContainer>
-            <Button mode="contained" uppercase={false} onPress={() => navigation.navigate("MainTab")}>
+            <Button mode="contained" uppercase={false} onPress={doLogin} disabled={loading}>
               Fazer Login
             </Button>
           </TextContainer>
    
           <TextContainer>
-            <Button mode="outlined" uppercase={false} onPress={() => navigation.navigate("SignUp")}>
+            <Button mode="outlined" uppercase={false} onPress={() => navigation.navigate("SignUp")} disabled={loading}>
               Fazer Cadastro
             </Button>
           </TextContainer>       

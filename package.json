@@ -34,7 +34,8 @@
     "react-native-toast-message": "^1.3.5",
     "react-native-vector-icons": "^7.1.0",
     "react-native-web": "~0.13.12",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "validator": "^13.1.17"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
