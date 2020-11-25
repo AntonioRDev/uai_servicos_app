@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TextInput, Button } from 'react-native-paper';
@@ -9,9 +9,18 @@ import styles, {
   TextLogin,
   BodyContainer
 } from "./styles";
+import { getUsers } from "../../services/user";
 
 const Login = () => {
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const tryGetUsers = async () => {
+      const users = await getUsers();
+      console.log(users);
+    };
+    tryGetUsers();
+  },[]);
 
   return (
     <Container>

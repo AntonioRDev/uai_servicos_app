@@ -2,8 +2,8 @@ import api from "../api";
 
 export const getUsers = async() => {
     try{ 
-        const users = await api.get("/usuario");
-        return users;
+        const response = await api().get("/usuario");
+        return response.data;
     } catch (error) {
         return null;
     }
