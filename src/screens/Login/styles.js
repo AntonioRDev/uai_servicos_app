@@ -43,7 +43,7 @@ export const TextLogin = styled.Text`
   font-weight: bold;
   font-size: 22px;
   margin-bottom: 25px;
-  margin-left: 5px
+  margin-left: 5px;
 `
 
 export const BodyContainer = styled.View`
