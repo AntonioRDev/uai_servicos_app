@@ -13,13 +13,28 @@ import {
   CardsScrollView,
   ServiceCardContainer,
 } from "./styles";
+import { Menu, Divider } from "react-native-paper";
 import Plus from "../../assets/icons/plus.svg";
 import Settings from "../../assets/icons/settings.svg";
 import ProfileImage from "../../assets/images/alexandre-pires.jpg";
 import ServiceCard from "../../components/ServiceCard";
+import { useNavigation } from "@react-navigation/native";
+import { logoff } from "../../services/authentication" 
 
 export default () => {
+  const navigation = useNavigation();
   const [qty, setQty] = useState([1, 2, 3, 4, 5, 6]);
+  const [menuVisible, setMenuVisible] = useState(false);
+
+  const openMenu = () => setMenuVisible(true);
+
+  const closeMenu = () => setMenuVisible(false);
+  
+  const logout = async() => {
+    closeMenu();
+    await logoff();
+    navigation.navigate("Login");
+  }
 
   return (
     <Container statusBarHeigth={StatusBar.currentHeight}>
@@ -27,8 +42,16 @@ export default () => {
         <ImageProfile source={ProfileImage} />
         <Name>Alexandre Pires</Name>
 
-        <SettingsCtn>
-          <Settings height="24" width="24" />
+        <SettingsCtn>          
+          <Menu
+            visible={menuVisible}
+            onDismiss={closeMenu}
+            anchor={<Settings height="24" width="24" onPress={openMenu}/>}
+          >
+            <Menu.Item onPress={() => {}} title="Item 1" />
+            <Divider />
+            <Menu.Item icon="logout" onPress={logout} title="Sair" />
+          </Menu>
         </SettingsCtn>
       </ProfileHeader>
 
