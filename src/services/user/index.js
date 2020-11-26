@@ -8,3 +8,11 @@ export const getUsers = async() => {
         return null;
     }
 }
+
+export const createUser = async() => {
+    try{
+        
+    } catch(error) {
+
+    }
+}

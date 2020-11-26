@@ -3,23 +3,23 @@ import { Container, ContentContainer, LoadingIcon } from "./styles";
 import LoadingArt from "../../assets/images/loading-art.svg";
 import { useNavigation } from "@react-navigation/native";
 
-import { getToken } from "../../services/local-storage";
+import { verifyIfIsAlreadyLogged } from "../../services/authentication";
 
 export default () => {
     const navigation = useNavigation();
 
     useEffect(() => {
         const checkToken = async () => {
-            const token = await getToken();
-            
-            if(token){
-                // validar
+            const isLogged = await verifyIfIsAlreadyLogged();
+            console.log("load isLogged", isLogged);
+            if(isLogged){
+                navigation.navigate("MainTab");
             } else {
                 navigation.navigate("Login");
             }
         }
 
-        checkToken()
+        checkToken();
     }, [])
 
     return (

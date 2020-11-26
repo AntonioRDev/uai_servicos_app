@@ -12,6 +12,7 @@ import {
 } from "./styles";
 import { isEmail, showToast } from "../../services/util";
 import { login } from "../../services/authentication";
+import { verifyIfIsAlreadyLogged } from "../../services/authentication";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -20,8 +21,15 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log("on load");
-    // TODO: validar se já existe token no local storage
+    const checkToken = async () => {
+        const isLogged = await verifyIfIsAlreadyLogged();
+        console.log("login isLogged", isLogged);
+        if(isLogged){
+            navigation.navigate("MainTab");
+        }
+    }
+
+    checkToken();
   },[]);
 
   const doLogin = async() => {
@@ -41,7 +49,7 @@ const Login = () => {
 
     try{
       const response = await login(email, password);
-      console.log(response);
+      console.log("response", response);
       setLoading(false);
       navigation.navigate("MainTab");
     } catch(error) {    
