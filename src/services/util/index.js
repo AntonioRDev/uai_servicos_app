@@ -13,3 +13,7 @@ export const showToast = (type = "success", title, text, position = "top") => {
         position: position
     });
 }
+
+export const checkPhone = (phone) => {
+    return validator.isMobilePhone(phone, "pt-BR");
+}

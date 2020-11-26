@@ -21,15 +21,52 @@ import CheckBox from "@react-native-community/checkbox";
 import { format } from "date-fns";
 
 export default () => {
-  const [date, setDate] = useState(new Date());
+  const [mCheck, setMCheck] = useState(true);
+  const [fCheck, setFCheck] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const { step, setStep } = useRegister();
+  const {
+    step,
+    setStep,
+    name,
+    setName,
+    cpf,
+    setCpf,
+    rg,
+    setRg,
+    bDate,
+    setBDate,
+    phone,
+    setPhone,
+    gender,
+    setGender,
+    address,
+    setAddress,
+  } = useRegister();
   const navigation = useNavigation();
 
   const onDateChange = (event, selectedDate) => {
-    setDate(selectedDate || date);
+    setBDate(selectedDate || bDate);
     setShowDatePicker(false);
   };
+
+  const onGenderChange = (gender) => {
+    if(gender === "M") {
+      if(!mCheck) {
+        setFCheck(false);
+        setMCheck(true);
+      }
+    } else {
+      if(!fCheck) {
+        setMCheck(false);
+        setFCheck(true);
+      }
+    }
+  }
+
+  const onRegister = () => {
+    console.log("onRegister");
+    // navigation.navigate("MainTab");
+  }
 
   return (
     <>
@@ -41,17 +78,29 @@ export default () => {
         <>
           <FormGroup>
             <Label>Nome</Label>
-            <Input placeholder="Digite seu nome" />
+            <Input
+              placeholder="Digite seu nome"
+              onChangeText={(text) => setName(text)}
+              value={name}
+            />
           </FormGroup>
 
           <FormGroup>
             <Label>CPF</Label>
-            <Input placeholder="Digite seu CPF" />
+            <Input
+              placeholder="Digite seu CPF"
+              onChangeText={(text) => setCpf(text)}
+              value={cpf}
+            />
           </FormGroup>
 
           <FormGroup>
             <Label>RG</Label>
-            <Input placeholder="Digite seu RG" />
+            <Input
+              placeholder="Digite seu RG"
+              onChangeText={(text) => setRg(text)}
+              value={rg}
+            />
           </FormGroup>
         </>
       ) : (
@@ -59,12 +108,12 @@ export default () => {
           <FormGroup>
             <Label>Data de Nascimento</Label>
             <DateInput onPress={() => setShowDatePicker(true)}>
-              <DateText>{format(date, "dd/M/yyyy")}</DateText>
+              <DateText>{format(bDate, "dd/M/yyyy")}</DateText>
             </DateInput>
 
             {showDatePicker && (
               <DateTimePicker
-                value={date}
+                value={bDate}
                 mode="date"
                 is24Hour={true}
                 display="default"
@@ -77,12 +126,12 @@ export default () => {
             <Label>Gênero</Label>
             <GenderContainer>
               <GenderCheckContainer>
-                <CheckBox />
+                <CheckBox value={mCheck} onValueChange={() => onGenderChange("M")}/>
                 <GenderText>M</GenderText>
               </GenderCheckContainer>
 
               <GenderCheckContainer>
-                <CheckBox />
+                <CheckBox value={fCheck} onValueChange={() => onGenderChange("F")}/>
                 <GenderText>F</GenderText>
               </GenderCheckContainer>
             </GenderContainer>
@@ -90,7 +139,20 @@ export default () => {
 
           <FormGroup>
             <Label>Endereço</Label>
-            <Input placeholder="Digite seu endereço" />
+            <Input
+              placeholder="Digite seu endereço"
+              onChangeText={(text) => setAddress(text)}
+              value={address}
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <Label>Telefone</Label>
+            <Input
+              placeholder="Digite seu telefone"
+              onChangeText={(text) => setPhone(text)}
+              value={phone}
+            />
           </FormGroup>
         </>
       )}
@@ -107,7 +169,7 @@ export default () => {
         )}
 
         {step === 3 && (
-          <NextButton onPress={() => navigation.navigate("MainTab")}>
+          <NextButton onPress={onRegister}>
             <NextText>finalizar</NextText>
           </NextButton>
         )}
