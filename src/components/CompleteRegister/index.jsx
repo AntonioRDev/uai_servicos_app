@@ -10,14 +10,13 @@ import {
   GenderCheckContainer,
   GenderText,
   NextContainer,
-  NextButton,
-  NextText,
 } from "./styles";
 import { useRegister } from "../../contexts/Register";
 import { useNavigation } from "@react-navigation/native";
 import ProgressBar from "../ProgressBar";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import CheckBox from "@react-native-community/checkbox";
+import { TextInput, Button } from "react-native-paper";
 import { format } from "date-fns";
 
 export default () => {
@@ -40,18 +39,15 @@ export default () => {
       {step === 2 ? (
         <>
           <FormGroup>
-            <Label>Nome</Label>
-            <Input placeholder="Digite seu nome" />
+            <TextInput label="Nome"></TextInput>
           </FormGroup>
 
           <FormGroup>
-            <Label>CPF</Label>
-            <Input placeholder="Digite seu CPF" />
+            <TextInput label="CPF"></TextInput>
           </FormGroup>
 
           <FormGroup>
-            <Label>RG</Label>
-            <Input placeholder="Digite seu RG" />
+            <TextInput label="RG"></TextInput>
           </FormGroup>
         </>
       ) : (
@@ -96,20 +92,32 @@ export default () => {
       )}
 
       <NextContainer>
-        <NextButton onPress={() => setStep(step - 1)}>
-          <NextText>voltar</NextText>
-        </NextButton>
+        <Button
+          icon="arrow-left"
+          uppercase={false}
+          onPress={() => setStep(step - 1)}
+        >
+          voltar
+        </Button>
 
         {step === 2 && (
-          <NextButton onPress={() => setStep(step + 1)}>
-            <NextText>próximo</NextText>
-          </NextButton>
+          <Button
+            mode="contained"
+            uppercase={false}
+            onPress={() => setStep(step + 1)}
+          >
+            próximo
+          </Button>
         )}
 
         {step === 3 && (
-          <NextButton onPress={() => navigation.navigate("MainTab")}>
-            <NextText>finalizar</NextText>
-          </NextButton>
+          <Button
+            mode="contained"
+            uppercase={false}
+            onPress={() => navigation.navigate("MainTab")}
+          >
+            finalizar
+          </Button>
         )}
       </NextContainer>
     </>
