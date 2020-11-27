@@ -85,7 +85,7 @@ export default () => {
           <Menu
             visible={menuVisible}
             onDismiss={closeMenu}
-            anchor={<Settings height="30" width="30" onPress={openMenu} />}
+            anchor={<Settings height="30" width="30" fill="#FFF" onPress={openMenu} />}
           >
             <Menu.Item onPress={() => {}} title="Menu de Opções" />
             <Divider />
