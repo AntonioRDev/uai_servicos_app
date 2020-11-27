@@ -10,14 +10,13 @@ import {
   GenderCheckContainer,
   GenderText,
   NextContainer,
-  NextButton,
-  NextText,
 } from "./styles";
 import { useRegister } from "../../contexts/Register";
 import { useNavigation } from "@react-navigation/native";
 import ProgressBar from "../ProgressBar";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import CheckBox from "@react-native-community/checkbox";
+import { TextInput, Button } from "react-native-paper";
 import { format } from "date-fns";
 import { showToast } from "../../services/util";
 import { createUser } from "../../services/user";
@@ -62,13 +61,13 @@ export default () => {
         setGender("M");
       }
     } else {
-      if(!fCheck) {
+      if (!fCheck) {
         setMCheck(false);
         setFCheck(true);
         setGender("F");
       }
     }
-  }
+  };
 
   const onRegister = async() => {
     console.log("onRegister");
@@ -181,12 +180,18 @@ export default () => {
             <Label>Gênero</Label>
             <GenderContainer>
               <GenderCheckContainer>
-                <CheckBox value={mCheck} onValueChange={() => onGenderChange("M")}/>
+                <CheckBox
+                  value={mCheck}
+                  onValueChange={() => onGenderChange("M")}
+                />
                 <GenderText>M</GenderText>
               </GenderCheckContainer>
 
               <GenderCheckContainer>
-                <CheckBox value={fCheck} onValueChange={() => onGenderChange("F")}/>
+                <CheckBox
+                  value={fCheck}
+                  onValueChange={() => onGenderChange("F")}
+                />
                 <GenderText>F</GenderText>
               </GenderCheckContainer>
             </GenderContainer>
@@ -213,14 +218,22 @@ export default () => {
       )}
 
       <NextContainer>
-        <NextButton onPress={() => setStep(step - 1)}>
-          <NextText>voltar</NextText>
-        </NextButton>
+        <Button
+          icon="arrow-left"
+          uppercase={false}
+          onPress={() => setStep(step - 1)}
+        >
+          voltar
+        </Button>
 
         {step === 2 && (
-          <NextButton onPress={() => setStep(step + 1)}>
-            <NextText>próximo</NextText>
-          </NextButton>
+          <Button
+            mode="contained"
+            uppercase={false}
+            onPress={() => setStep(step + 1)}
+          >
+            próximo
+          </Button>
         )}
 
         {step === 3 && (
