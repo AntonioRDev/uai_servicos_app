@@ -23,17 +23,19 @@ import ServiceCard from "../../components/ServiceCard";
 import { useNavigation } from "@react-navigation/native";
 import { logoff } from "../../services/authentication";
 import { getServicesByUser } from "../../services/service";
+import { useGlobal } from "../../contexts/Global";
 
 export default () => {
   const navigation = useNavigation();
+  const { user } = useGlobal();
   const [menuVisible, setMenuVisible] = useState(false);
   const [serviceCards, setServiceCards] = useState([]);
 
   useEffect(() => {
     const _getServicesByUser = async () => {
       try {
-        const services = await getServicesByUser(2);
-        setServiceCards(services);
+        const services = await getServicesByUser(user.usuarioId);
+        setServiceCards(services ? services : []);
       } catch (error) {
         console.log("profile _getServicesByUser error", error);
       }
@@ -56,7 +58,7 @@ export default () => {
     <Container statusBarHeigth={StatusBar.currentHeight}>
       <ProfileHeader>
         <ImageProfile source={ProfileImage} />
-        <Name>Alexandre Pires</Name>
+        <Name>{user.nome}</Name>
 
         <SettingsCtn>
           <Menu
@@ -76,7 +78,12 @@ export default () => {
           <TitleStyle>Meus Serviços</TitleStyle>
 
           <AddServiceButton>
-            <Plus height="33" width="33" fill="#283c73" />
+            <Plus
+              height="26"
+              width="26"
+              fill="#283c73"
+              onPress={() => navigation.navigate("NewService")}
+            />
           </AddServiceButton>
         </TitleContainer>
 
