@@ -34,6 +34,7 @@ import { logoff } from "../../services/authentication";
 import { getServicesByUser } from "../../services/service";
 import { useGlobal } from "../../contexts/Global";
 import { useFocusEffect } from '@react-navigation/native';
+import { showToast, hideToast } from "../../services/util";
 
 export default () => {
   const navigation = useNavigation();
@@ -47,8 +48,13 @@ export default () => {
     useCallback(() => {
       const _getServicesByUser = async () => {
         try {
+          showToast("info", "Carregando serviços.");
+          setServiceCards([]);
+
           const services = await getServicesByUser(user.usuarioId);
           setServiceCards(services ? services : []);
+
+          hideToast();
         } catch (error) {
           console.log("profile _getServicesByUser error", error);
         }

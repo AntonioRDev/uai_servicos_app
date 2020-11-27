@@ -24,6 +24,8 @@ import FilterIcon from "../../assets/icons/filter.svg";
 import { getServices } from "../../services/service";
 import { useFocusEffect } from '@react-navigation/native';
 import { useGlobal } from "../../contexts/Global";
+import { showToast, hideToast } from "../../services/util";
+import { getUserById } from "../../services/user";
 
 export default () => {
   const { user } = useGlobal();
@@ -36,10 +38,16 @@ export default () => {
     useCallback(() => {
       const _getServices = async () => {
         try {
+          showToast("info", "Carregando serviços.");
+          setServiceCards([]);
+
           const services = await getServices();
           const validServices = services.filter(s => s.usuarioId !== user.usuarioId);
+          const updatedServices = await addUserInfoToServices(validServices);
 
-          setServiceCards(validServices);
+          setServiceCards(updatedServices);
+
+          hideToast();
         } catch (error) {
           console.log("search getServices error", error);
         }
@@ -53,6 +61,27 @@ export default () => {
       };
     }, [])
   );
+
+  const addUserInfoToServices = async(services) => {
+    const servicesWithUserInfo = [];
+
+    for(const service of services) {
+      try {
+        const userInfo = await getUserById(service.usuarioId);
+        const updatedService = {...service};
+        delete updatedService.usuarioId;
+
+        updatedService.usuario = userInfo;
+        servicesWithUserInfo.push(updatedService);
+      } catch (error) {
+        console.log("addUserInfoToServices error", error);
+        showToast("error", "Erro ao buscar serviços.")
+        return [];
+      }
+    }
+
+    return servicesWithUserInfo;
+  }
 
   return (
     <Container statusBarHeigth={StatusBar.currentHeight}>
@@ -82,7 +111,7 @@ export default () => {
                     titleStyle={{ fontSize: 20 }}
                     openMenu={true}
                   >
-                    <Title style={{ fontSize: 16 }}>robertinho carlos</Title>
+                    <Title style={{ fontSize: 16 }}>{serviceCard.usuario.nome}</Title>
                     <Paragraph>{serviceCard.descricao}</Paragraph>
                   </List.Accordion>
                 </Card.Content>

@@ -9,6 +9,15 @@ export const getUsers = async () => {
   }
 };
 
+export const getUserById = async (userId) => {
+  try {
+    const response = await api().get(`/usuario/${userId}`);
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+};
+
 export const createUser = async (
   email,
   password,
