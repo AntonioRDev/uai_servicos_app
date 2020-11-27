@@ -13,9 +13,11 @@ import {
 import { isEmail, showToast } from "../../services/util";
 import { login } from "../../services/authentication";
 import { verifyIfIsAlreadyLogged } from "../../services/authentication";
+import { useGlobal } from "../../contexts/Global";
 
 const Login = () => {
   const navigation = useNavigation();
+  const { setUser } = useGlobal();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,7 +25,7 @@ const Login = () => {
   useEffect(() => {
     const checkToken = async () => {
         const isLogged = await verifyIfIsAlreadyLogged();
-        console.log("login isLogged", isLogged);
+
         if(isLogged){
             navigation.navigate("MainTab");
         }
@@ -50,6 +52,13 @@ const Login = () => {
     try{
       const response = await login(email, password);
 
+      if(!response || response.status !== 200){
+        showToast("error", "Usuário ou senha incorreto(s).");
+        setLoading(false);
+        return;
+      }
+
+      setUser(response.data.usuario);
       setLoading(false);
       navigation.navigate("MainTab");
     } catch(error) {    

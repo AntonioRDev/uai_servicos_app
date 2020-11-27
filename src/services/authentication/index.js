@@ -9,7 +9,7 @@ export const login = async(email, password) => {
         };
 
         const response = await api().post("/login", body);
-        await setToken(response.data.token);
+        await setToken(response.data.infoToken.token);
 
         return response;
     } catch (error) {
