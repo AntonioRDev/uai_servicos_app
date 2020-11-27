@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "uai-servicos-app",
+    "name": "Uai Servicos",
     "slug": "uai-servicos-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/icons/icon.png",
+    "icon": "./src/assets/icons/favicon.png",
     "splash": {
       "image": "./src/assets/icons/splash.png",
       "resizeMode": "contain",
@@ -37,6 +37,9 @@
         "wasm",
         "svg"
       ]
+    },
+    "android": {
+      "package": "com.antoniorib.uaiservicosapp"
     }
   }
 }

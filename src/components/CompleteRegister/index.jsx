@@ -10,6 +10,8 @@ import {
   GenderCheckContainer,
   GenderText,
   NextContainer,
+  NextButton,
+  NextText
 } from "./styles";
 import { useRegister } from "../../contexts/Register";
 import { useNavigation } from "@react-navigation/native";

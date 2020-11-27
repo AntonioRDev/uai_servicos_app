@@ -26,5 +26,5 @@ export const verifyIfIsAlreadyLogged = async() => {
     const token = await getToken();
     const user = await getUserInfo();
 
-    return token && user ? true : false;
+    return token && (Object.keys(user) > 0) ? true : false;
 }

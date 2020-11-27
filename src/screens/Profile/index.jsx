@@ -46,6 +46,7 @@ export default () => {
 
   useFocusEffect(
     useCallback(() => {
+      console.log(user);
       const _getServicesByUser = async () => {
         try {
           showToast("info", "Carregando serviços.");
