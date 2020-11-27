@@ -17,6 +17,7 @@ import {
 import CompleteRegister from "../../components/CompleteRegister";
 import { useRegister } from "../../contexts/Register";
 import { isEmail, showToast } from "../../services/util";
+import Logo from "../../assets/images/logo-white.png";
 
 export default () => {
   const [privacityCheck, setPrivacityCheck] = useState(false);
@@ -50,11 +51,8 @@ export default () => {
   return (
     <Container>
       <Image
-        source={{
-          uri:
-            "https://upload.wikimedia.org/wikipedia/commons/0/07/UNESCO_logo_white.png",
-        }}
-        style={{ width: 250, height: 250, marginTop: -380 }}
+        source={Logo}
+        style={{ width: 250, height: 250, marginTop: -450 }}
       />
       <InnerContainer>
         {step === 1 ? (

@@ -15,6 +15,7 @@ import { login } from "../../services/authentication";
 import { verifyIfIsAlreadyLogged } from "../../services/authentication";
 import { useGlobal } from "../../contexts/Global";
 import { setUserInfo } from "../../services/local-storage";
+import Logo from "../../assets/images/logo-white.png";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -71,8 +72,8 @@ const Login = () => {
 
   return (
     <Container>
-      <Image source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/0/07/UNESCO_logo_white.png'}}
-       style={{width: 250, height: 250, marginTop: -310}} />
+      <Image source={Logo}
+       style={{width: 250, height: 250, marginTop: -360}} />
       <InnerContainer>  
         <BodyContainer>        
           <TextLogin>Login</TextLogin>
