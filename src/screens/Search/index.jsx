@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import {
   Container,
   SearchHeader,
@@ -22,6 +22,7 @@ import { StatusBar } from "react-native";
 import ServiceCard from "../../components/ServiceCard";
 import FilterIcon from "../../assets/icons/filter.svg";
 import { getServices } from "../../services/service";
+import { useFocusEffect } from '@react-navigation/native';
 
 export default () => {
   const [serviceCards, setServiceCards] = useState([]);
@@ -30,18 +31,25 @@ export default () => {
 
   const onChangeSearch = (query) => setSearchQuery(query);
 
-  useEffect(() => {
-    const _getServices = async () => {
-      try {
-        const services = await getServices();
-        setServiceCards(services);
-      } catch (error) {
-        console.log("search getServices error", error);
-      }
-    };
+  useFocusEffect(
+    useCallback(() => {
+      const _getServices = async () => {
+        try {
+          const services = await getServices();
+          setServiceCards(services);
+        } catch (error) {
+          console.log("search getServices error", error);
+        }
+      };
 
-    _getServices();
-  }, []);
+      _getServices();
+
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
 
   return (
     <Container statusBarHeigth={StatusBar.currentHeight}>

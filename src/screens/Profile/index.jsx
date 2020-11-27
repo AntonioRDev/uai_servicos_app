@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StatusBar, View } from "react-native";
 import {
   Card,
@@ -33,6 +33,7 @@ import { useNavigation } from "@react-navigation/native";
 import { logoff } from "../../services/authentication";
 import { getServicesByUser } from "../../services/service";
 import { useGlobal } from "../../contexts/Global";
+import { useFocusEffect } from '@react-navigation/native';
 
 export default () => {
   const navigation = useNavigation();
@@ -42,21 +43,26 @@ export default () => {
 
   const [isModalVisible, setVisible] = React.useState(false);
 
-  useEffect(() => {
-    const _getServicesByUser = async () => {
-      try {
-        const services = await getServicesByUser("2");
-        setServiceCards(services ? services : []);
-      } catch (error) {
-        console.log("profile _getServicesByUser error", error);
-      }
-    };
-
-    _getServicesByUser();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      const _getServicesByUser = async () => {
+        try {
+          const services = await getServicesByUser(user.usuarioId);
+          setServiceCards(services ? services : []);
+        } catch (error) {
+          console.log("profile _getServicesByUser error", error);
+        }
+      };
+  
+      _getServicesByUser();
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
 
   const openMenu = () => setMenuVisible(true);
-
   const closeMenu = () => setMenuVisible(false);
 
   const logout = async () => {
