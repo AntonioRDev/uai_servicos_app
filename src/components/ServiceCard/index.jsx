@@ -20,7 +20,7 @@ import {
 import Star from "../../assets/icons/star.svg";
 import MonaLisa from "../../assets/images/mona-lisa.jpg";
 
-export default ({ to }) => {
+export default ({ to, title, userName, description  }) => {
   return (
     <Container>
       <Header>
@@ -28,7 +28,7 @@ export default ({ to }) => {
         {to === "profile" ? (
           <>
             <TitleInfos>
-              <Title>Pintura</Title>
+              <Title>{title}</Title>
 
               <Stars>
                 <Star height="24" width="24" fill="#FFBE23" />
@@ -43,7 +43,7 @@ export default ({ to }) => {
           <>
             <TitleInfosService>
               <Div>
-                <Title>Pintura</Title>
+                <Title>{title}</Title>
 
                 <Stars search={to === "search"}>
                   <Star height="24" width="24" fill="#FFBE23" />
@@ -54,7 +54,7 @@ export default ({ to }) => {
                 </Stars>
               </Div>
 
-              <UserName>Fidalgo da Silva</UserName>
+            <UserName>{userName}</UserName>
             </TitleInfosService>
           </>
         )}
@@ -63,12 +63,7 @@ export default ({ to }) => {
       {to !== "profile" && (
         <Body>
           <Description>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam
-            velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate
-            commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor
-            sed eleifend tristique, tortor mauris molestie elit, et lacinia
-            ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium
-            sit amet quis magna. Aenean velit odio, elementum in tempus ut,
+            {description}
           </Description>
         </Body>
       )}

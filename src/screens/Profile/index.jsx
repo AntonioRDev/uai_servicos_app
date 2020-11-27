@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar } from "react-native";
 import {
   Container,
@@ -19,22 +19,36 @@ import Settings from "../../assets/icons/settings.svg";
 import ProfileImage from "../../assets/images/alexandre-pires.jpg";
 import ServiceCard from "../../components/ServiceCard";
 import { useNavigation } from "@react-navigation/native";
-import { logoff } from "../../services/authentication" 
+import { logoff } from "../../services/authentication";
+import { getServicesByUser } from "../../services/service";
 
 export default () => {
   const navigation = useNavigation();
-  const [qty, setQty] = useState([1, 2, 3, 4, 5, 6]);
   const [menuVisible, setMenuVisible] = useState(false);
+  const [serviceCards, setServiceCards] = useState([]);
+
+  useEffect(() => {
+    const _getServicesByUser = async () => {
+      try {
+        const services = await getServicesByUser(2);
+        setServiceCards(services);
+      } catch (error) {
+        console.log("profile _getServicesByUser error", error);
+      }
+    };
+
+    _getServicesByUser();
+  }, []);
 
   const openMenu = () => setMenuVisible(true);
 
   const closeMenu = () => setMenuVisible(false);
-  
-  const logout = async() => {
+
+  const logout = async () => {
     closeMenu();
     await logoff();
     navigation.navigate("Login");
-  }
+  };
 
   return (
     <Container statusBarHeigth={StatusBar.currentHeight}>
@@ -42,11 +56,11 @@ export default () => {
         <ImageProfile source={ProfileImage} />
         <Name>Alexandre Pires</Name>
 
-        <SettingsCtn>          
+        <SettingsCtn>
           <Menu
             visible={menuVisible}
             onDismiss={closeMenu}
-            anchor={<Settings height="24" width="24" onPress={openMenu}/>}
+            anchor={<Settings height="24" width="24" onPress={openMenu} />}
           >
             <Menu.Item onPress={() => {}} title="Item 1" />
             <Divider />
@@ -65,10 +79,15 @@ export default () => {
         </TitleContainer>
 
         <CardsScrollView>
-          {qty.map((q) => {
+          {serviceCards.map((service) => {
             return (
-              <ServiceCardContainer key={q}>
-                <ServiceCard to="profile" />
+              <ServiceCardContainer key={service.servicoId}>
+                <ServiceCard
+                  to="profile"
+                  title={service.titulo}
+                  userName={service.usuarioId}
+                  description={service.descricao}
+                />
               </ServiceCardContainer>
             );
           })}

@@ -8,3 +8,12 @@ export const getServices = async() => {
         return null;
     }
 }
+
+export const getServicesByUser = async(userId) => {
+    try{ 
+        const response = await api().get(`/servico/usuario/${userId}`);
+        return response.data;
+    } catch (error) {
+        return null;
+    }
+}

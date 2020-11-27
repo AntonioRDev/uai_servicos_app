@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   SearchHeader,
@@ -8,14 +8,28 @@ import {
   GoButtonText,
   FilterButton,
   CardsScrollView,
-  SearchCardContainer
+  SearchCardContainer,
 } from "./styles";
 import { StatusBar } from "react-native";
 import ServiceCard from "../../components/ServiceCard";
 import FilterIcon from "../../assets/icons/filter.svg";
+import { getServices } from "../../services/service";
 
 export default () => {
-  const [qty, setQty] = useState([1, 2, 3, 4, 5, 6]);
+  const [serviceCards, setServiceCards] = useState([]);
+
+  useEffect(() => {
+    const _getServices = async () => {
+      try {
+        const services = await getServices();
+        setServiceCards(services);
+      } catch (error) {
+        console.log("search getServices error", error);
+      }
+    };
+
+    _getServices();
+  });
 
   return (
     <Container statusBarHeigth={StatusBar.currentHeight}>
@@ -34,10 +48,15 @@ export default () => {
       </SearchHeader>
 
       <CardsScrollView>
-        {qty.map((q) => {
+        {serviceCards.map((serviceCard) => {
           return (
-            <SearchCardContainer key={q}>
-              <ServiceCard to="search" />
+            <SearchCardContainer key={serviceCard.servicoId}>
+              <ServiceCard
+                to="search"
+                title={serviceCard.titulo}
+                userName={serviceCard.usuarioId}
+                description={serviceCard.descricao}
+              />
             </SearchCardContainer>
           );
         })}
