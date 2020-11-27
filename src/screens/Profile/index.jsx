@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from "react-native";
+import { Card, Title, Paragraph, Button, List } from "react-native-paper";
 import {
   Container,
   ProfileHeader,
@@ -8,10 +9,11 @@ import {
   SettingsCtn,
   ProfileBody,
   TitleContainer,
-  Title,
+  TitleStyle,
   AddServiceButton,
   CardsScrollView,
   ServiceCardContainer,
+  LeftAlign,
 } from "./styles";
 import { Menu, Divider } from "react-native-paper";
 import Plus from "../../assets/icons/plus.svg";
@@ -73,23 +75,40 @@ export default () => {
 
       <ProfileBody>
         <TitleContainer>
-          <Title>Meus Serviços</Title>
+          <TitleStyle>Meus Serviços</TitleStyle>
 
           <AddServiceButton>
-            <Plus height="26" width="26" fill="#283c73" onPress={() => navigation.navigate("NewService")}/>
+            <Plus
+              height="26"
+              width="26"
+              fill="#283c73"
+              onPress={() => navigation.navigate("NewService")}
+            />
           </AddServiceButton>
         </TitleContainer>
 
         <CardsScrollView>
           {serviceCards.map((service) => {
             return (
-              <ServiceCardContainer key={service.servicoId}>
-                <ServiceCard
-                  to="profile"
-                  title={service.titulo}
-                  userName={service.usuarioId}
-                  description={service.descricao}
-                />
+              <ServiceCardContainer>
+                <Card>
+                  <Card.Content>
+                    <List.Accordion
+                      style={{ marginLeft: -15, marginTop: -15 }}
+                      title={service.titulo}
+                      titleStyle={{ fontSize: 18 }}
+                      openMenu={true}
+                    >
+                      <Paragraph>{service.descricao}</Paragraph>
+                    </List.Accordion>
+                  </Card.Content>
+
+                  <Card.Actions>
+                    <LeftAlign>
+                      <Button>Remover</Button>
+                    </LeftAlign>
+                  </Card.Actions>
+                </Card>
               </ServiceCardContainer>
             );
           })}

@@ -1,9 +1,10 @@
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
 
 export const Container = styled.View`
   flex: 1;
-  padding-top: ${props => props.statusBarHeigth ? `${props.statusBarHeigth + 15}px` : 0};
-  background-color: white;
+  padding-top: ${(props) =>
+    props.statusBarHeigth ? `${props.statusBarHeigth + 15}px` : 0};
+  background-color: #283c73;
 `;
 
 export const ProfileHeader = styled.View`
@@ -32,7 +33,11 @@ export const SettingsCtn = styled.View`
 `;
 
 export const ProfileBody = styled.View`
-  background-color: #EBEBEB;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  background-color: #f7f7f7;
+  margin-top: 15px;
+  padding-top: 30px;
   flex: 1;
 `;
 
@@ -42,14 +47,14 @@ export const TitleContainer = styled.View`
   padding: 15px 10px;
 `;
 
-export const Title = styled.Text`
-  font-size: 18px;
+export const TitleStyle = styled.Text`
+  font-size: 20px;
+  margin-left: 10px;
   color: #283c73;
-  font-weight: bold;
 `;
 
 export const AddServiceButton = styled.View`
-  
+  margin-right: 24px;
 `;
 
 export const CardsScrollView = styled.ScrollView`
@@ -57,5 +62,9 @@ export const CardsScrollView = styled.ScrollView`
 `;
 
 export const ServiceCardContainer = styled.View`
-    margin-bottom: 10px;
-`
+  margin-bottom: 15px;
+`;
+
+export const LeftAlign = styled.View`
+  margin-left: auto;
+`;
