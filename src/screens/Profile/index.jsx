@@ -82,7 +82,7 @@ export default () => {
       <ProfileHeader>
         <ImageProfile
           source={{
-            uri: `https://ui-avatars.com/api/?name=${user.name}`,
+            uri: `https://ui-avatars.com/api/?name=${user.nome}`,
           }}
         />
         <Name>Olá! {user.nome}</Name>
