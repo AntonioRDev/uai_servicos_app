@@ -71,10 +71,10 @@ export default () => {
       <ProfileHeader>
         <ImageProfile
           source={{
-            uri: "https://ui-avatars.com/api/?name=Lucas+Ferreira+Braga",
+            uri: `https://ui-avatars.com/api/?name=${user.name}`,
           }}
         />
-        <Name>Olá! Lucas Braga. {user.nome}</Name>
+        <Name>Olá! {user.nome}</Name>
 
         <SettingsCtn>
           <Menu
@@ -134,6 +134,7 @@ export default () => {
               </ServiceCardContainer>
             );
           })}
+          {/* Implementar modal para excluir um servico */}
           {/* <View style={{ flex: 1 }}>
             <Button title="Show modal" onPress={() => setVisible(true)} />
             <Modal isVisible={isModalVisible}>
