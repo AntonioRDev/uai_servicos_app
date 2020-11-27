@@ -10,6 +10,14 @@ import {
   CardsScrollView,
   SearchCardContainer,
 } from "./styles";
+import {
+  Searchbar,
+  Paragraph,
+  Button,
+  List,
+  Card,
+  Title,
+} from "react-native-paper";
 import { StatusBar } from "react-native";
 import ServiceCard from "../../components/ServiceCard";
 import FilterIcon from "../../assets/icons/filter.svg";
@@ -17,6 +25,10 @@ import { getServices } from "../../services/service";
 
 export default () => {
   const [serviceCards, setServiceCards] = useState([]);
+
+  const [searchQuery, setSearchQuery] = React.useState("");
+
+  const onChangeSearch = (query) => setSearchQuery(query);
 
   useEffect(() => {
     const _getServices = async () => {
@@ -35,11 +47,11 @@ export default () => {
     <Container statusBarHeigth={StatusBar.currentHeight}>
       <SearchHeader>
         <SearchInput>
-          <Input placeholder="Procure um serviço aqui..." />
-
-          <GoButton>
-            <GoButtonText>Go!</GoButtonText>
-          </GoButton>
+          <Searchbar
+            placeholder="Search"
+            onChangeText={onChangeSearch}
+            value={searchQuery}
+          />
         </SearchInput>
 
         <FilterButton>
@@ -51,12 +63,19 @@ export default () => {
         {serviceCards.map((serviceCard) => {
           return (
             <SearchCardContainer key={serviceCard.servicoId}>
-              <ServiceCard
-                to="search"
-                title={serviceCard.titulo}
-                userName={serviceCard.usuarioId}
-                description={serviceCard.descricao}
-              />
+              <Card>
+                <Card.Content>
+                  <List.Accordion
+                    style={{ marginLeft: -15, marginTop: -10 }}
+                    title={`${serviceCard.titulo}`}
+                    titleStyle={{ fontSize: 20 }}
+                    openMenu={true}
+                  >
+                    <Title style={{ fontSize: 16 }}>robertinho carlos</Title>
+                    <Paragraph>{serviceCard.descricao}</Paragraph>
+                  </List.Accordion>
+                </Card.Content>
+              </Card>
             </SearchCardContainer>
           );
         })}
