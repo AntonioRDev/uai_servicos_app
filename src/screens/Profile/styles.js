@@ -11,12 +11,13 @@ export const ProfileHeader = styled.View`
   position: relative;
   justify-content: center;
   align-items: center;
-  padding-bottom: 15px;
+  margin-bottom: 15px;
 `;
 
 export const ImageProfile = styled.Image`
-  height: 72px;
-  width: 72px;
+  height: 75px;
+  width: 75px;
+  margin-top: 25px;
   border-radius: 35px;
 `;
 
@@ -24,6 +25,7 @@ export const Name = styled.Text`
   font-size: 18px;
   font-weight: bold;
   margin-top: 10px;
+  color: #ffffff;
 `;
 
 export const SettingsCtn = styled.View`
@@ -36,7 +38,7 @@ export const ProfileBody = styled.View`
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
   background-color: #f7f7f7;
-  margin-top: 15px;
+  margin-top: 5px;
   padding-top: 30px;
   flex: 1;
 `;
