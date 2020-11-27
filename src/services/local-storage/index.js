@@ -14,11 +14,12 @@ export const removeToken = async () => {
 
 // User
 export const getUserInfo = async () => {
-    return await AsyncStorage.getItem("user");
+    const userString = await AsyncStorage.getItem("user");
+    return JSON.parse(userString);
 }
 
 export const setUserInfo = async (user) => {
-    return await AsyncStorage.setItem("user", user);
+    return await AsyncStorage.setItem("user", JSON.stringify(user));
 }
 
 export const removeUserInfo = async () => {
