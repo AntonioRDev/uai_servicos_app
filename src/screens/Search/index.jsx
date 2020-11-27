@@ -23,10 +23,11 @@ import ServiceCard from "../../components/ServiceCard";
 import FilterIcon from "../../assets/icons/filter.svg";
 import { getServices } from "../../services/service";
 import { useFocusEffect } from '@react-navigation/native';
+import { useGlobal } from "../../contexts/Global";
 
 export default () => {
+  const { user } = useGlobal();
   const [serviceCards, setServiceCards] = useState([]);
-
   const [searchQuery, setSearchQuery] = React.useState("");
 
   const onChangeSearch = (query) => setSearchQuery(query);
@@ -36,7 +37,9 @@ export default () => {
       const _getServices = async () => {
         try {
           const services = await getServices();
-          setServiceCards(services);
+          const validServices = services.filter(s => s.usuarioId !== user.usuarioId);
+
+          setServiceCards(validServices);
         } catch (error) {
           console.log("search getServices error", error);
         }
