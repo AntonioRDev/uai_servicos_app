@@ -14,6 +14,7 @@ import { isEmail, showToast } from "../../services/util";
 import { login } from "../../services/authentication";
 import { verifyIfIsAlreadyLogged } from "../../services/authentication";
 import { useGlobal } from "../../contexts/Global";
+import { setUserInfo } from "../../services/local-storage";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -57,7 +58,8 @@ const Login = () => {
         setLoading(false);
         return;
       }
-
+      
+      setUserInfo(response.data.usuario);
       setUser(response.data.usuario);
       setLoading(false);
       navigation.navigate("MainTab");

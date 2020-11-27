@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar, View } from "react-native";
-import Modal from "react-native-modal";
 import {
   Card,
   Title,
@@ -106,7 +105,7 @@ export default () => {
         <CardsScrollView>
           {serviceCards.map((service) => {
             return (
-              <ServiceCardContainer>
+              <ServiceCardContainer key={service.servicoId}>
                 <Card>
                   <Card.Content>
                     <List.Accordion

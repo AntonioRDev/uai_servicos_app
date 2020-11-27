@@ -1,5 +1,5 @@
 import api from "../api";
-import { getToken, setToken, removeToken } from "../local-storage"
+import { getToken, setToken, removeToken, getUserInfo } from "../local-storage"
 
 export const login = async(email, password) => {
     try{ 
@@ -24,5 +24,7 @@ export const logoff = async() => {
 
 export const verifyIfIsAlreadyLogged = async() => {
     const token = await getToken();
-    return token ? true : false;
+    const user = await getUserInfo();
+
+    return token && user ? true : false;
 }

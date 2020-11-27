@@ -11,3 +11,16 @@ export const setToken = async (token) => {
 export const removeToken = async () => {
     return await AsyncStorage.removeItem("token");
 }
+
+// User
+export const getUserInfo = async () => {
+    return await AsyncStorage.getItem("user");
+}
+
+export const setUserInfo = async (user) => {
+    return await AsyncStorage.setItem("user", user);
+}
+
+export const removeUserInfo = async () => {
+    return await AsyncStorage.removeItem("user");
+}
