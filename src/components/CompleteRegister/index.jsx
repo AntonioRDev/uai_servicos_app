@@ -105,6 +105,7 @@ export default () => {
     try {
       await createUser(email, password, name, rg, cpf, bDate, gender, address, phone);
     } catch(error) {
+      console.log("createUserError", error);
       showToast("error", "Erro ao criar conta, tente novamente mais tarde.");
       return;
     }
