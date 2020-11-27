@@ -3,6 +3,7 @@ import api from "../api";
 export const getServices = async() => {
     try{ 
         const response = await api().get("/servico");
+
         return response.data;
     } catch (error) {
         console.log("getServices error", error);
@@ -26,6 +27,23 @@ export const getServicesByCategory = async(category) => {
         return response.data;
     } catch (error) {
         console.log("getServicesByCategory error", error);
+        return null;
+    }
+}
+
+export const createService = async(userId, title, category, description) => {
+    try{
+        const body = {
+            "usuarioId": userId,
+            "titulo": title,
+            "categoria": category,
+            "descricao": description
+        };
+
+        const response = await api().post(`/servico`, body);
+        return response.data;
+    } catch(error) {
+        console.log("createService error", error);
         return null;
     }
 }

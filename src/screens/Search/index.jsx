@@ -29,7 +29,7 @@ export default () => {
     };
 
     _getServices();
-  });
+  }, []);
 
   return (
     <Container statusBarHeigth={StatusBar.currentHeight}>
