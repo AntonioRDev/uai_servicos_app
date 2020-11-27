@@ -11,7 +11,7 @@ export const login = async(email, password) => {
         const response = await api().post("/login", body);
         await setToken(response.data.token);
 
-        return response.data;
+        return response;
     } catch (error) {
         console.log("error", error);
         return null;

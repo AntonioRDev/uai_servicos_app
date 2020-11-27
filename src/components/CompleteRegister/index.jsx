@@ -19,6 +19,9 @@ import ProgressBar from "../ProgressBar";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import CheckBox from "@react-native-community/checkbox";
 import { format } from "date-fns";
+import { showToast } from "../../services/util";
+import { createUser } from "../../services/user";
+import { login } from "../../services/authentication";
 
 export default () => {
   const [mCheck, setMCheck] = useState(true);
@@ -27,6 +30,8 @@ export default () => {
   const {
     step,
     setStep,
+    email, 
+    password,
     name,
     setName,
     cpf,
@@ -49,23 +54,73 @@ export default () => {
     setShowDatePicker(false);
   };
 
-  const onGenderChange = (gender) => {
+  const onGenderChange = async(gender) => {
     if(gender === "M") {
       if(!mCheck) {
         setFCheck(false);
         setMCheck(true);
+        setGender("M");
       }
     } else {
       if(!fCheck) {
         setMCheck(false);
         setFCheck(true);
+        setGender("F");
       }
     }
   }
 
-  const onRegister = () => {
+  const onRegister = async() => {
     console.log("onRegister");
-    // navigation.navigate("MainTab");
+
+    if(!name){
+      showToast("error", "Digite seu nome.");
+      setStep(2);
+      return;
+    }
+
+    if(!cpf){ 
+      showToast("error", "Digite seu cpf.");
+      setStep(2);
+      return;
+    }
+
+    if(!rg) {
+      showToast("error", "Digite seu RG.");
+      setStep(2);
+      return;
+    }
+
+    if(!address) {
+      showToast("error", "Digite seu endereço.");
+      return;
+    }
+
+    if(!phone) {
+      showToast("error", "Digite seu telefone.");
+      return;
+    }
+
+    try {
+      await createUser(email, password, name, rg, cpf, bDate, gender, address, phone);
+    } catch(error) {
+      showToast("error", "Erro ao criar conta, tente novamente mais tarde.");
+      return;
+    }
+
+    try {
+      const reponse = await login(email, password);     
+      
+      if (!reponse || response.status !== 200){
+        showToast("success", "Conta criada com sucesso.");
+        navigation.navigate("Login");
+      }
+
+      navigation.navigate("MainTab");
+    } catch (error) {
+      showToast("success", "Conta criada com sucesso.");
+      navigation.navigate("Login");
+    }
   }
 
   return (

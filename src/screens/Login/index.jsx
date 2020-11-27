@@ -49,7 +49,7 @@ const Login = () => {
 
     try{
       const response = await login(email, password);
-      console.log("response", response);
+
       setLoading(false);
       navigation.navigate("MainTab");
     } catch(error) {    
