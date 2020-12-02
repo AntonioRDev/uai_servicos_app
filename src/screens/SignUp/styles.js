@@ -6,7 +6,7 @@ Container, InnerContainer, TextContainer, TextLogin, BodyContainer;
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #283c73;
+  background-color: #1e387d;
   align-items: center;
   justify-content: center;
   padding: 50px 50px;
@@ -35,7 +35,7 @@ export const ImageContainer = styled.View`
 `;
 
 export const TextLogin = styled.Text`
-  color: #283c73;
+  color: #1e387d;
   font-weight: bold;
   font-size: 22px;
   margin-bottom: 25px;
@@ -60,7 +60,7 @@ export const PrivacityText = styled.Text`
 `;
 
 export const PrivacityBolderText = styled.Text`
-  color: #283c73;
+  color: #1e387d;
   font-weight: bold;
   font-size: 14px;
 `;
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 120,
     borderRadius: 10,
-    backgroundColor: "#283c73",
+    backgroundColor: "#1e387d",
   },
 });
 

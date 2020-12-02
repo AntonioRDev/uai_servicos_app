@@ -6,7 +6,14 @@ export const Container = styled.View`
     props.statusBarHeigth ? `${props.statusBarHeigth + 30}px` : 0};
   padding-left: 15px;
   padding-right: 15px;
-  background-color: #f7f7f7;
+  background-color: #264aab;
+`;
+
+export const TextL = styled.Text`
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
 `;
 
 export const SearchHeader = styled.View`
@@ -17,6 +24,7 @@ export const SearchHeader = styled.View`
 
 export const SearchInput = styled.View`
   flex-direction: row;
+  width: 80%;
 `;
 
 export const Input = styled.TextInput`

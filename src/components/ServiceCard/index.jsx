@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   Container,
   Header,
@@ -16,57 +17,25 @@ import {
   DeleteText,
   SeeMoreButton,
   SeeMoreText,
+  SubText,
 } from "./styles";
 import Star from "../../assets/icons/star.svg";
+import Rating from "../Rating";
 import MonaLisa from "../../assets/images/mona-lisa.jpg";
 
-export default ({ to, title, userName, description  }) => {
+export default ({ to, title, userName, description, qtd }) => {
+  const navigation = useNavigation();
   return (
     <Container>
       <Header>
         <ServiceImage source={MonaLisa} />
-        {to === "profile" ? (
-          <>
-            <TitleInfos>
-              <Title>{title}</Title>
 
-              <Stars>
-                <Star height="24" width="24" fill="#FFBE23" />
-                <Star height="24" width="24" fill="#FFBE23" />
-                <Star height="24" width="24" fill="#FFBE23" />
-                <Star height="24" width="24" fill="#FFBE23" />
-                <Star height="24" width="24" fill="#FFBE23" />
-              </Stars>
-            </TitleInfos>
-          </>
-        ) : (
-          <>
-            <TitleInfosService>
-              <Div>
-                <Title>{title}</Title>
-
-                <Stars search={to === "search"}>
-                  <Star height="24" width="24" fill="#FFBE23" />
-                  <Star height="24" width="24" fill="#FFBE23" />
-                  <Star height="24" width="24" fill="#FFBE23" />
-                  <Star height="24" width="24" fill="#FFBE23" />
-                  <Star height="24" width="24" fill="#FFBE23" />
-                </Stars>
-              </Div>
-
-            <UserName>{userName}</UserName>
-            </TitleInfosService>
-          </>
-        )}
+        <TitleInfos>
+          <Title>{title}</Title>
+          <SubText>{userName} - 4km</SubText>
+          <Rating qtdStar={5}></Rating>
+        </TitleInfos>
       </Header>
-
-      {to !== "profile" && (
-        <Body>
-          <Description>
-            {description}
-          </Description>
-        </Body>
-      )}
 
       <Footer>
         {to === "profile" ? (
@@ -74,8 +43,10 @@ export default ({ to, title, userName, description  }) => {
             <DeleteText>Deletar</DeleteText>
           </DeleteButton>
         ) : (
-          <SeeMoreButton>
-            <SeeMoreText>Veja Mais...</SeeMoreText>
+          <SeeMoreButton onPress>
+            <SeeMoreText onPress={() => navigation.navigate("SeeMore")}>
+              Veja Mais...
+            </SeeMoreText>
           </SeeMoreButton>
         )}
       </Footer>

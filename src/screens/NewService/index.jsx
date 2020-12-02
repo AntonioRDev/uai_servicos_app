@@ -11,6 +11,8 @@ import {
   DescriptionView,
   ButtonView,
   InputView,
+  InnerContainer,
+  TitleStyle,
 } from "./styles";
 import Plus from "../../assets/icons/plus.svg";
 import { useGlobal } from "../../contexts/Global";
@@ -62,47 +64,53 @@ export default () => {
 
   return (
     <Container statusBarHeigth={StatusBar.currentHeight}>
-      <ImageContainer>
-        <Plus height="80" width="80" fill="#83868d" />
-      </ImageContainer>
+      {/* <ImageContainer>
+        <Plus height="80" width="80" fill="#FFFFFF" />
+      </ImageContainer> */}
 
       <TitleView>
-        <Title>Divulgue seu serviço de forma gratuita!</Title>
+        <Title>Divulgue seu serviço{"\n"}de forma gratuita!</Title>
       </TitleView>
+      <InnerContainer>
+        <FormGroup>
+          <TitleStyle>Dados do serviço</TitleStyle>
+          {/* <CategoryView>
+            <TextInput label="Foto"></TextInput>
+          </CategoryView> */}
 
-      <FormGroup>
-        <CategoryView>
-          <TextInput
-            label="Título"
-            value={title}
-            onChangeText={(text) => setTitle(text)}
-          ></TextInput>
-        </CategoryView>
+          <CategoryView>
+            <TextInput
+              label="Título"
+              value={title}
+              onChangeText={(text) => setTitle(text)}
+            ></TextInput>
+          </CategoryView>
 
-        <CategoryView>
-          <TextInput
-            label="Categoria"
-            value={category}
-            onChangeText={(text) => setCategory(text)}
-          ></TextInput>
-        </CategoryView>
+          <CategoryView>
+            <TextInput
+              label="Categoria"
+              value={category}
+              onChangeText={(text) => setCategory(text)}
+            ></TextInput>
+          </CategoryView>
 
-        <DescriptionView>
-          <TextInput
-            label="Descrição"
-            multiline={true}
-            value={description}
-            onChangeText={(text) => setDescription(text)}
-          ></TextInput>
-        </DescriptionView>
-      </FormGroup>
+          <DescriptionView>
+            <TextInput
+              label="Descrição"
+              multiline={true}
+              value={description}
+              onChangeText={(text) => setDescription(text)}
+            ></TextInput>
+          </DescriptionView>
+        </FormGroup>
 
-      <ButtonView>
-        <Button mode="contained" uppercase={false} onPress={newService}>
-          {" "}
-          Cadastrar
-        </Button>
-      </ButtonView>
+        <ButtonView>
+          <Button mode="contained" uppercase={false} onPress={newService}>
+            {" "}
+            Cadastrar
+          </Button>
+        </ButtonView>
+      </InnerContainer>
     </Container>
   );
 };

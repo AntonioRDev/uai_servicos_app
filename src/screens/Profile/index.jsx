@@ -33,8 +33,10 @@ import { useNavigation } from "@react-navigation/native";
 import { logoff } from "../../services/authentication";
 import { getServicesByUser } from "../../services/service";
 import { useGlobal } from "../../contexts/Global";
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect } from "@react-navigation/native";
 import { showToast, hideToast } from "../../services/util";
+import MonaLisa from "../../assets/images/mona-lisa.jpg";
+import Rating from "../../components/Rating";
 
 export default () => {
   const navigation = useNavigation();
@@ -60,7 +62,7 @@ export default () => {
           console.log("profile _getServicesByUser error", error);
         }
       };
-  
+
       _getServicesByUser();
       return () => {
         // Do something when the screen is unfocused
@@ -80,28 +82,35 @@ export default () => {
 
   return (
     <Container statusBarHeigth={StatusBar.currentHeight}>
-      <ProfileHeader>
-        <ImageProfile
-          source={{
-            uri: `https://ui-avatars.com/api/?name=${user.nome}`,
-          }}
-        />
-        <Name>Olá! {user.nome}</Name>
-
-        <SettingsCtn>
-          <Menu
-            visible={menuVisible}
-            onDismiss={closeMenu}
-            anchor={<Settings height="30" width="30" fill="#FFF" onPress={openMenu} />}
-          >
-            <Menu.Item onPress={() => {}} title="Menu de Opções" />
-            <Divider />
-            <Menu.Item icon="logout" onPress={logout} title="Sair" />
-          </Menu>
-        </SettingsCtn>
-      </ProfileHeader>
-
       <ProfileBody>
+        <ImageProfile source={MonaLisa} />
+
+        <ProfileHeader>
+          <Name>
+            Olá! Monalisa Alfonsas{user.nome} {"\n"}{" "}
+            <Rating qtdStar={4}></Rating>
+          </Name>
+
+          <SettingsCtn>
+            <Menu
+              visible={menuVisible}
+              onDismiss={closeMenu}
+              anchor={
+                <Settings
+                  height="30"
+                  width="30"
+                  fill="#111111"
+                  onPress={openMenu}
+                />
+              }
+            >
+              <Menu.Item onPress={() => {}} title="Menu de Opções" />
+              <Divider />
+              <Menu.Item icon="logout" onPress={logout} title="Sair" />
+            </Menu>
+          </SettingsCtn>
+        </ProfileHeader>
+
         <TitleContainer>
           <TitleStyle>Meus Serviços</TitleStyle>
 
@@ -109,13 +118,42 @@ export default () => {
             <Plus
               height="32"
               width="32"
-              fill="#283c73"
+              fill="#1e387d"
               onPress={() => navigation.navigate("NewService")}
             />
           </AddServiceButton>
         </TitleContainer>
+        {/* <View
+          style={{
+            borderBottomColor: "#808080",
+            borderBottomWidth: 0.3,
+          }}
+        /> */}
 
         <CardsScrollView>
+          <ServiceCardContainer>
+            <ServiceCardContainer>
+              <ServiceCard
+                title="Coletor de Jardim"
+                userName="Marcos Almeida"
+                to="profile"
+              ></ServiceCard>
+            </ServiceCardContainer>
+            <ServiceCardContainer>
+              <ServiceCard
+                title="Coletor de Jardim"
+                userName="Marcos Almeida"
+                to="profile"
+              ></ServiceCard>
+            </ServiceCardContainer>
+            <ServiceCardContainer>
+              <ServiceCard
+                title="Coletor de Jardim"
+                userName="Marcos Almeida"
+                to="profile"
+              ></ServiceCard>
+            </ServiceCardContainer>
+          </ServiceCardContainer>
           {serviceCards.map((service) => {
             return (
               <ServiceCardContainer key={service.servicoId}>
@@ -134,7 +172,7 @@ export default () => {
                   <Card.Actions>
                     <LeftAlign>
                       <Button
-                        style={{ color: "#283c73" }}
+                        style={{ color: "#1e387d" }}
                         uppercase={false}
                         onPress={() => setVisible(true)}
                       >

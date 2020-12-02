@@ -8,31 +8,31 @@ import { verifyIfIsAlreadyLogged } from "../../services/authentication";
 import { getUserInfo } from "../../services/local-storage";
 
 export default () => {
-    const { setUser } = useGlobal();
-    const navigation = useNavigation();
+  const { setUser } = useGlobal();
+  const navigation = useNavigation();
 
-    useEffect(() => {
-        const checkToken = async () => {
-            const isLogged = await verifyIfIsAlreadyLogged();
+  useEffect(() => {
+    const checkToken = async () => {
+      const isLogged = await verifyIfIsAlreadyLogged();
 
-            if(isLogged){
-                const user = await getUserInfo();
-                setUser(user);
-                navigation.navigate("MainTab");
-            } else {
-                navigation.navigate("Login");
-            }
-        }
+      if (isLogged) {
+        const user = await getUserInfo();
+        setUser(user);
+        navigation.navigate("MainTab");
+      } else {
+        navigation.navigate("Login");
+      }
+    };
 
-        checkToken();
-    }, [])
+    checkToken();
+  }, []);
 
-    return (
-        <Container>
-            <ContentContainer>
-                <LoadingArt width="80%" height="160"/>
-                <LoadingIcon size="large" color="#283c73"/>
-            </ContentContainer>
-        </Container>
-    )
-}
+  return (
+    <Container>
+      <ContentContainer>
+        <LoadingArt width="80%" height="160" />
+        <LoadingIcon size="large" color="#1e387d" />
+      </ContentContainer>
+    </Container>
+  );
+};

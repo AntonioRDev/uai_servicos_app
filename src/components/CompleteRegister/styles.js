@@ -15,7 +15,7 @@ export const FormGroup = styled.View`
 `;
 
 export const Label = styled.Text`
-  color: #283c73;
+  color: #1e387d;
   font-weight: bold;
   font-size: 16px;
 `;
@@ -55,7 +55,7 @@ export const NextContainer = styled.View`
 
 export const NextButton = styled.TouchableOpacity`
   padding: 10px 20px;
-  background-color: #283c73;
+  background-color: #1e387d;
   border-radius: 5px;
 `;
 

@@ -5,6 +5,7 @@ import Login from "../../screens/Login";
 import Load from "../../screens/Load";
 import SignUp from "../../screens/SignUp";
 import RegisterProvider from "../../contexts/Register";
+import SeeMore from "../../screens/SeeMore";
 import MainTab from "./main-tab";
 
 const Stack = createStackNavigator();
@@ -29,6 +30,7 @@ export default () => {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignUp" component={makeSignUp} />
       <Stack.Screen name="MainTab" component={MainTab} />
+      <Stack.Screen name="SeeMore" component={SeeMore} />
     </Stack.Navigator>
   );
 };
