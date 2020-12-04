@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://uaiservicosapp.azurewebsites.net";
+const baseUrl = "https://uai-servicos.azurewebsites.net/";
 
 export default () => {
     return axios.create({

@@ -1,15 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { StatusBar, View } from "react-native";
+import React, { useState, useCallback } from "react";
+import { StatusBar } from "react-native";
 import {
-  Card,
-  Title,
-  Paragraph,
+  Dialog,
   Button,
-  List,
-  Avatar,
-  Portal,
-  Provider,
-  Text,
+  Paragraph
 } from "react-native-paper";
 import {
   Container,
@@ -37,18 +31,20 @@ import { useFocusEffect } from "@react-navigation/native";
 import { showToast, hideToast } from "../../services/util";
 import MonaLisa from "../../assets/images/mona-lisa.jpg";
 import Rating from "../../components/Rating";
+import { deleteService as _deleteService } from "../../services/service"
 
 export default () => {
   const navigation = useNavigation();
   const { user } = useGlobal();
-  const [menuVisible, setMenuVisible] = useState(false);
   const [serviceCards, setServiceCards] = useState([]);
-
-  const [isModalVisible, setVisible] = React.useState(false);
+  const [serviceIdToDelete, setServiceIdToDelete] = useState("");
+  
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [dialogVisible, setDeleteDialogVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useFocusEffect(
     useCallback(() => {
-      console.log(user);
       const _getServicesByUser = async () => {
         try {
           showToast("info", "Carregando serviços.");
@@ -80,35 +76,85 @@ export default () => {
     navigation.navigate("Login");
   };
 
+  const editProfile = () => {
+
+  }
+
+  const openDeleteDialog = (serviceId) => {
+    setServiceIdToDelete(serviceId);
+    setDeleteDialogVisible(true);
+  }
+
+  const onCancelDeleteDialog = () => {
+    setServiceIdToDelete("");
+    setDeleteDialogVisible(false);
+  }
+
+  const deleteService = async() => {
+    setLoading(true);
+    showToast("info", "Deletando serviço.");
+
+    try {
+      const response = await _deleteService(serviceIdToDelete);
+
+      if(response && response.status !== 200) {
+        setLoading(false);
+        hideToast();
+        setDeleteDialogVisible(false);
+        showToast("error", "Erro ao deletar serviço");
+        setServiceIdToDelete("");
+        return;
+      }
+
+      const newServices = serviceCards.filter((service) => service.servicoId !== serviceIdToDelete);
+
+      setServiceCards(newServices);
+      setLoading(false);
+      hideToast();
+      setDeleteDialogVisible(false);
+      showToast("success", "Serviço deletado com sucesso");
+      setServiceIdToDelete("");
+    } catch(error) {
+      console.log("deleteService error", error);
+
+      setLoading(false);
+      hideToast();
+      setDeleteDialogVisible(false);
+      showToast("error", "Erro ao deletar serviço");
+      setServiceIdToDelete("");
+    }
+  }
+
   return (
     <Container statusBarHeigth={StatusBar.currentHeight}>
+      <SettingsCtn statusBarHeigth={StatusBar.currentHeight}>
+        <Menu
+          visible={menuVisible}
+          onDismiss={closeMenu}
+          anchor={
+            <Settings
+              height="30"
+              width="30"
+              fill="#111111"
+              onPress={openMenu}
+            />
+          }
+        >
+          <Menu.Item icon="account-edit" onPress={editProfile} title="Editar Perfil" />
+          <Divider />
+          <Menu.Item icon="logout" onPress={logout} title="Sair" />
+        </Menu>
+      </SettingsCtn>
+
       <ProfileBody>
         <ImageProfile source={MonaLisa} />
 
         <ProfileHeader>
           <Name>
-            Olá! Monalisa Alfonsas{user.nome} {"\n"}{" "}
+            Olá! {user.nome} {"\n"}{" "}
             <Rating qtdStar={4}></Rating>
           </Name>
 
-          <SettingsCtn>
-            <Menu
-              visible={menuVisible}
-              onDismiss={closeMenu}
-              anchor={
-                <Settings
-                  height="30"
-                  width="30"
-                  fill="#111111"
-                  onPress={openMenu}
-                />
-              }
-            >
-              <Menu.Item onPress={() => {}} title="Menu de Opções" />
-              <Divider />
-              <Menu.Item icon="logout" onPress={logout} title="Sair" />
-            </Menu>
-          </SettingsCtn>
         </ProfileHeader>
 
         <TitleContainer>
@@ -123,79 +169,35 @@ export default () => {
             />
           </AddServiceButton>
         </TitleContainer>
-        {/* <View
-          style={{
-            borderBottomColor: "#808080",
-            borderBottomWidth: 0.3,
-          }}
-        /> */}
 
         <CardsScrollView>
-          <ServiceCardContainer>
-            <ServiceCardContainer>
-              <ServiceCard
-                title="Coletor de Jardim"
-                userName="Marcos Almeida"
-                to="profile"
-              ></ServiceCard>
-            </ServiceCardContainer>
-            <ServiceCardContainer>
-              <ServiceCard
-                title="Coletor de Jardim"
-                userName="Marcos Almeida"
-                to="profile"
-              ></ServiceCard>
-            </ServiceCardContainer>
-            <ServiceCardContainer>
-              <ServiceCard
-                title="Coletor de Jardim"
-                userName="Marcos Almeida"
-                to="profile"
-              ></ServiceCard>
-            </ServiceCardContainer>
-          </ServiceCardContainer>
           {serviceCards.map((service) => {
             return (
               <ServiceCardContainer key={service.servicoId}>
-                <Card>
-                  <Card.Content>
-                    <List.Accordion
-                      style={{ marginLeft: -15, marginTop: -15 }}
-                      title={service.titulo}
-                      titleStyle={{ fontSize: 18 }}
-                      openMenu={true}
-                    >
-                      <Paragraph>{service.descricao}</Paragraph>
-                    </List.Accordion>
-                  </Card.Content>
-
-                  <Card.Actions>
-                    <LeftAlign>
-                      <Button
-                        style={{ color: "#1e387d" }}
-                        uppercase={false}
-                        onPress={() => setVisible(true)}
-                      >
-                        Remover
-                      </Button>
-                    </LeftAlign>
-                  </Card.Actions>
-                </Card>
+                <ServiceCard
+                  title={service.titulo}
+                  userName={user.nome}
+                  to="profile"
+                  onDelete={() => openDeleteDialog(service.servicoId)}
+                ></ServiceCard>
               </ServiceCardContainer>
             );
           })}
-          {/* Implementar modal para excluir um servico */}
-          {/* <View style={{ flex: 1 }}>
-            <Button title="Show modal" onPress={() => setVisible(true)} />
-            <Modal isVisible={isModalVisible}>
-              <View style={{ flex: 1 }}>
-                <Text>Hello!</Text>
-                <Button title="Hide modal" onPress={() => setVisible(false)} />
-              </View>
-            </Modal>
-          </View> */}
         </CardsScrollView>
       </ProfileBody>
+
+      <Dialog visible={dialogVisible} onDismiss={onCancelDeleteDialog}>
+        <Dialog.Title>Confirmação</Dialog.Title>
+
+        <Dialog.Content>
+          <Paragraph>Tem certeza que deseja deletar esse serviço?</Paragraph>
+        </Dialog.Content>
+
+        <Dialog.Actions>
+          <Button onPress={onCancelDeleteDialog} disabled={loading}>Cancelar</Button>
+          <Button onPress={deleteService} disabled={loading}>Deletar</Button>
+        </Dialog.Actions>
+      </Dialog>
     </Container>
   );
 };

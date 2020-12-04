@@ -23,7 +23,7 @@ import Star from "../../assets/icons/star.svg";
 import Rating from "../Rating";
 import MonaLisa from "../../assets/images/mona-lisa.jpg";
 
-export default ({ to, title, userName, description, qtd }) => {
+export default ({ to, title, userName, description, qtd, onDelete }) => {
   const navigation = useNavigation();
   return (
     <Container>
@@ -39,7 +39,7 @@ export default ({ to, title, userName, description, qtd }) => {
 
       <Footer>
         {to === "profile" ? (
-          <DeleteButton>
+          <DeleteButton onPress={onDelete ? onDelete : null}>
             <DeleteText>Deletar</DeleteText>
           </DeleteButton>
         ) : (

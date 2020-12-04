@@ -33,7 +33,8 @@ export const Name = styled.Text`
 
 export const SettingsCtn = styled.View`
   position: absolute;
-  top: 0;
+  top: ${(props) =>
+    props.statusBarHeigth ? `${props.statusBarHeigth + 15}px` : 0};;
   right: 25px;
 `;
 
