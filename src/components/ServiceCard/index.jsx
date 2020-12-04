@@ -32,6 +32,8 @@ export default ({
   onDelete,
   km,
   urlImg,
+  email,
+  id,
 }) => {
   const navigation = useNavigation();
   return (
@@ -64,6 +66,8 @@ export default ({
                   qtd: qtd,
                   km: km,
                   urlImg: urlImg,
+                  id: id,
+                  email: email,
                 })
               }
             >

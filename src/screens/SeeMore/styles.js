@@ -61,13 +61,18 @@ export const Name = styled.Text`
 export const Email = styled.Text`
   color: #808080;
   font-size: 16px;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   margin-left: 15px;
 `;
 
 export const M5 = styled.Text`
-  margin-top: 15px;
+  margin-top: 5px;
   margin-left: 15px;
+`;
+
+export const Xistose = styled.Text`
+  margin-top: 20px;
+  margin-bottom: 45px;
 `;
 
 export const DivCol = styled.View`

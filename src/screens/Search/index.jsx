@@ -123,16 +123,6 @@ export default () => {
         </FilterButton>
       </SearchHeader>
 
-      <SearchCardContainer>
-        <ServiceCard
-          title={`xistose`}
-          userName={`description`}
-          description={`description`}
-          qtd={5}
-          km={10}
-        ></ServiceCard>
-      </SearchCardContainer>
-
       <CardsScrollView>
         {serviceFilterCards.map((serviceCard) => {
           return (
@@ -140,6 +130,13 @@ export default () => {
               <ServiceCard
                 title={`${serviceCard.titulo}`}
                 userName={`${serviceCard.usuario.nome}`}
+                email={`${serviceCard.usuario.email}`}
+                id={`${serviceCard.id}`}
+                description={`${serviceCard.descricao}`}
+                qtd={5}
+                km={`${
+                  serviceCard.usuario.nome[0].toLowerCase().charCodeAt(0) / 10
+                }`}
               ></ServiceCard>
             </SearchCardContainer>
           );
