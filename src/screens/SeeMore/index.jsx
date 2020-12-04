@@ -15,10 +15,20 @@ import {
   Description,
   Row,
   Voltar,
+  Email,
 } from "./styles";
 import MonaLisa from "../../assets/images/mona-lisa.jpg";
 
-const SeeMore = ({ nome, descricao, avaliacao, km, email }) => {
+const SeeMore = ({
+  to,
+  title,
+  userName,
+  description,
+  qtd,
+  onDelete,
+  km,
+  urlImg,
+}) => {
   const styles = StyleSheet.create({
     fab: {
       position: "absolute",
@@ -49,9 +59,10 @@ const SeeMore = ({ nome, descricao, avaliacao, km, email }) => {
           <Div>
             <ImageProfile source={MonaLisa} />
             <M5>
-              <Name>Xerox Holmes {nome}</Name>
+              <Name>{userName}</Name>
               {"\n"}
-              <Rating qtdStar={5}></Rating>
+              <Email>{title}</Email>
+              <Rating qtdStar={qtd}></Rating>
             </M5>
           </Div>
           <View
@@ -61,16 +72,7 @@ const SeeMore = ({ nome, descricao, avaliacao, km, email }) => {
             }}
           />
           <Div>
-            <Description>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Pellentesque eget rutrum odio, nec sodales leo. Ut at ultricies
-              urna. Duis aliquet magna dui, quis dapibus tellus imperdiet quis.
-              Nulla porta lacus non mi ullamcorper porta. Praesent nunc felis,
-              dapibus vitae posuere eu, placerat id ligula.{"\n"} {"\n"}Fusce at
-              vestibulum mi. Curabitur sollicitudin quam eu justo elementum,
-              vitae aliquet nulla lacinia. Nam pharetra velit ac quam lobortis,
-              sit amet dignissim purus efficitur.
-            </Description>
+            <Description>{description}</Description>
           </Div>
         </InnerContainer>
       </Container>

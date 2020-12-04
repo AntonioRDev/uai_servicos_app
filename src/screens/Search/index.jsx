@@ -27,13 +27,28 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useGlobal } from "../../contexts/Global";
 import { showToast, hideToast } from "../../services/util";
 import { getUserById } from "../../services/user";
+import { event } from "react-native-reanimated";
 
 export default () => {
   const { user } = useGlobal();
   const [serviceCards, setServiceCards] = useState([]);
+  const [serviceFilterCards, setServiceFilterCards] = useState([]);
   const [searchQuery, setSearchQuery] = React.useState("");
 
-  const onChangeSearch = (query) => setSearchQuery(query);
+  const onChangeSearch = (query) => {
+    console.log(query);
+    console.log(serviceCards);
+    if (query || query != "" || query != " ") {
+      setServiceFilterCards(
+        serviceCards.filter(
+          (el) => el.titulo.toLowerCase().indexOf(query.toLowerCase()) > -1
+        )
+      );
+    } else {
+      setServiceFilterCards(serviceCards);
+    }
+    setSearchQuery(query);
+  };
 
   useFocusEffect(
     useCallback(() => {
@@ -49,6 +64,7 @@ export default () => {
           const updatedServices = await addUserInfoToServices(validServices);
 
           setServiceCards(updatedServices);
+          setServiceFilterCards(updatedServices);
 
           hideToast();
         } catch (error) {
@@ -107,45 +123,18 @@ export default () => {
         </FilterButton>
       </SearchHeader>
 
-      <CardsScrollView>
-        <SearchCardContainer>
-          <ServiceCard
-            title="Coletor de Jardim"
-            userName="Marcos Almeida"
-          ></ServiceCard>
-        </SearchCardContainer>
-        <SearchCardContainer>
-          <ServiceCard
-            title="Coletor de Jardim"
-            userName="Marcos Almeida"
-          ></ServiceCard>
-        </SearchCardContainer>
-        <SearchCardContainer>
-          <ServiceCard
-            title="Coletor de Jardim"
-            userName="Marcos Almeida"
-          ></ServiceCard>
-        </SearchCardContainer>
-        <SearchCardContainer>
-          <ServiceCard
-            title="Coletor de Jardim"
-            userName="Marcos Almeida"
-          ></ServiceCard>
-        </SearchCardContainer>
-        <SearchCardContainer>
-          <ServiceCard
-            title="Coletor de Jardim"
-            userName="Marcos Almeida"
-          ></ServiceCard>
-        </SearchCardContainer>
-        <SearchCardContainer>
-          <ServiceCard
-            title="Coletor de Jardim"
-            userName="Marcos Almeida"
-          ></ServiceCard>
-        </SearchCardContainer>
+      <SearchCardContainer>
+        <ServiceCard
+          title={`xistose`}
+          userName={`description`}
+          description={`description`}
+          qtd={5}
+          km={10}
+        ></ServiceCard>
+      </SearchCardContainer>
 
-        {serviceCards.map((serviceCard) => {
+      <CardsScrollView>
+        {serviceFilterCards.map((serviceCard) => {
           return (
             <SearchCardContainer key={serviceCard.servicoId}>
               <ServiceCard

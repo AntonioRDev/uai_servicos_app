@@ -53,7 +53,14 @@ export const Description = styled.Text`
 
 export const Name = styled.Text`
   color: #111111;
-  font-size: 20px;
+  font-size: 18px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+`;
+
+export const Email = styled.Text`
+  color: #808080;
+  font-size: 16px;
   margin-bottom: 15px;
   margin-left: 15px;
 `;
